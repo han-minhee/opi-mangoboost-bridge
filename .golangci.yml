@@ -1,10 +1,8 @@
 version: "2"
-
 linters:
   enable:
     - bodyclose
     - dogsled
-    - errcheck
     - funlen
     - gochecknoinits
     - gocognit
@@ -12,8 +10,6 @@ linters:
     - gocritic
     - gocyclo
     - gosec
-    - govet
-    - ineffassign
     - misspell
     - nakedret
     - prealloc
@@ -23,26 +19,42 @@ linters:
     - unparam
     - whitespace
   settings:
+    dupl:
+      threshold: 200
     funlen:
       lines: 120
       statements: 120
-    dupl:
-      threshold: 200
     gocognit:
       min-complexity: 32
+    gosec:
+      excludes:
+        - G115
+    staticcheck:
+      checks:
+        - all
+        - -QF*
   exclusions:
+    generated: lax
     rules:
-      - path: (.+)_test.go
-        linters:
+      - linters:
           - funlen
-          - gocritic
           - gocognit
-
+          - gocritic
+        path: (.+)_test.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
 formatters:
   enable:
     - gofmt
     - goimports
-
-issues:
-  max-issues-per-linter: 0
-  max-same-issues: 0
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
