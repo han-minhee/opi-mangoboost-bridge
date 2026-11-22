@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2022 Dell Inc, or its subsidiaries.
+---
+# CI-only override, used with docker-compose.yml:
+#   COMPOSE_FILE=docker-compose.yml:docker-compose.ci.yml
+# It runs the grpc_cli smoke check directly, without a shell, so that its exit
+# status is the container's exit status and no Compose variable interpolation
+# can alter it.
+
+services:
+  opi-test:
+    entrypoint: ["grpc_cli"]
+    command: ["ls", "opi-mangoboost-server:50051", "opi_api.storage.v1.FrontendNvmeService", "-l"]
