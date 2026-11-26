@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   build:
-
+    name: call / build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -77,6 +77,7 @@ jobs:
           short-description: ${{ github.event.repository.description }}
 
   test:
+    name: call / test
     runs-on: ubuntu-latest
     env:
       # CI-only override of opi-test, see docker-compose.ci.yml.

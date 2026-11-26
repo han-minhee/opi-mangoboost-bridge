@@ -14,7 +14,7 @@ jobs:
   # Pull requests: read-only analysis. No OIDC token, no result publication
   # and no code-scanning upload; the SARIF file is only kept as an artifact.
   analysis-pr:
-    name: Scorecards analysis (pull request)
+    name: call / Scorecards analysis
     if: ${{ github.event_name == 'pull_request' }}
     runs-on: ubuntu-latest
     permissions:
@@ -45,7 +45,7 @@ jobs:
   # Trusted events: publish results and upload them to code scanning.
   # Scorecard only supports the default branch.
   analysis:
-    name: Scorecards analysis
+    name: Publish Scorecards analysis
     if: ${{ github.event_name != 'pull_request' && github.event.repository.default_branch == github.ref_name }}
     runs-on: ubuntu-latest
     permissions:
